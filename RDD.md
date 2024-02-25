@@ -48,3 +48,16 @@
         - フォームの選択項目編集
         - フォームの選択項目の追加
         - フォームの選択項目の削除
+
+### データベース
+- Forms
+    - FormID String
+        - uuid
+    - FormName String
+    - Deadline Date
+- Answers
+    - AnswerID String
+        - uuid
+    - AnswerName String
+    - FormID ForeignKey[Forms]
+
