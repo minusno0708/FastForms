@@ -4,12 +4,12 @@
 素早く手軽にアンケートを作成できるWebアプリケーションを作成する
 
 ## システム構成
-- クライアント: Next.js
-- サーバー: Go
+- フロントエンド: Next.js
+- バックエンド: Go
 - データベース: MongoDB
 
 ## 機能要件
-### クライアント
+### フロントエンド
 - ホーム画面
     - パス:/
     - 概要:アプリケーションの最初のページ
@@ -53,11 +53,17 @@
 - Forms
     - FormID String
         - uuid
-    - FormName String
+    - Title String
+    - Type Number
     - Deadline Date
+- Choices
+    - ChoiceID String
+        - uuid
+    - Content String
+    - FormID ForeignKey[Forms]
 - Answers
     - AnswerID String
         - uuid
-    - AnswerName String
     - FormID ForeignKey[Forms]
+    - ChoiceID Array[Foreignkey[Choices]]
 
