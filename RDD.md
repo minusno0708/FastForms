@@ -4,9 +4,8 @@
 素早く手軽にアンケートを作成できるWebアプリケーションを作成する
 
 ## システム構成
-- フロントエンド: Next.js
-- バックエンド: Go
-- データベース: MongoDB
+- アプリケーション: Phoenix Framework
+- データベース: PostgreSQL
 
 ## 機能要件
 ### フロントエンド
@@ -55,6 +54,8 @@
         - uuid
     - Title String
     - Type Number
+        - 1 単一選択
+        - 2 複数選択
     - Deadline Date
 - Choices
     - ChoiceID String
@@ -66,4 +67,3 @@
         - uuid
     - FormID ForeignKey[Forms]
     - ChoiceID Array[Foreignkey[Choices]]
-
