@@ -15,6 +15,6 @@ defmodule FastForms.Questions.Question do
   def changeset(question, attrs) do
     question
     |> cast(attrs, [:uuid, :title, :type, :deadline])
-    |> validate_required([:uuid, :title, :type, :deadline])
+    |> validate_required([:title, :type])
   end
 end

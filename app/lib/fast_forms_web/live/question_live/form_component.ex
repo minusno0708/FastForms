@@ -71,6 +71,8 @@ defmodule FastFormsWeb.QuestionLive.FormComponent do
   end
 
   defp save_question(socket, :new, question_params) do
+    question_params = question_params |> set_uuid()
+
     case Questions.create_question(question_params) do
       {:ok, question} ->
         notify_parent({:saved, question})
@@ -90,4 +92,6 @@ defmodule FastFormsWeb.QuestionLive.FormComponent do
   end
 
   defp notify_parent(msg), do: send(self(), {__MODULE__, msg})
+
+  defp set_uuid(question_params), do: %{question_params | "uuid" => UUID.uuid4()}
 end
