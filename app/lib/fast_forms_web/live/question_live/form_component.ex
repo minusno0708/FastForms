@@ -22,7 +22,7 @@ defmodule FastFormsWeb.QuestionLive.FormComponent do
         <.input field={@form[:uuid]} type="text" label="Uuid" />
         <.input field={@form[:title]} type="text" label="Title" />
         <.input field={@form[:type]} type="number" label="Type" />
-        <.input field={@form[:deadline]} type="datetime-local" label="Deadline" />
+        <.input field={@form[:deadline]} type="date" label="Deadline" />
         <:actions>
           <.button phx-disable-with="Saving...">Save Question</.button>
         </:actions>

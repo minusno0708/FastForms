@@ -5,7 +5,7 @@ defmodule FastForms.Questions.Question do
   schema "questions" do
     field :type, :integer
     field :title, :string
-    field :deadline, :naive_datetime
+    field :deadline, :date
     field :uuid, :string
 
     timestamps(type: :utc_datetime)

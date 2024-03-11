@@ -6,7 +6,7 @@ defmodule FastForms.Repo.Migrations.CreateQuestions do
       add :uuid, :string
       add :title, :string
       add :type, :integer
-      add :deadline, :naive_datetime
+      add :deadline, :date
 
       timestamps(type: :utc_datetime)
     end
