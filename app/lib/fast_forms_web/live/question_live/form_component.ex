@@ -71,7 +71,7 @@ defmodule FastFormsWeb.QuestionLive.FormComponent do
   end
 
   defp save_question(socket, :new, question_params) do
-    question_params = question_params |> set_uuid()
+    question_params = question_params |> set_uuid() |> set_deadline()
 
     case Questions.create_question(question_params) do
       {:ok, question} ->
@@ -94,4 +94,7 @@ defmodule FastFormsWeb.QuestionLive.FormComponent do
   defp notify_parent(msg), do: send(self(), {__MODULE__, msg})
 
   defp set_uuid(question_params), do: %{question_params | "uuid" => UUID.uuid4()}
+
+  defp set_deadline(question_params), do: %{question_params | "deadline" =>
+    Date.utc_today() |> Date.add(7) |> Date.to_string()}
 end
