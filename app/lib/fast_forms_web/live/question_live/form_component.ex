@@ -50,7 +50,7 @@ defmodule FastFormsWeb.QuestionLive.FormComponent do
   end
 
   def handle_event("save", %{"question" => question_params}, socket) do
-    save_question(socket, socket.assigns.action, question_params |> set_uuid() |> set_deadline())
+    save_question(socket, socket.assigns.action, question_params)
   end
 
   defp save_question(socket, :edit, question_params) do
