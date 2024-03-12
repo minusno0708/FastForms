@@ -10,7 +10,7 @@
 
 <.list>
   <:item title="Title"><%= @question.title %></:item>
-  <:item title="Type"><%= @question.type %></:item>
+  <:item title="Type"><%= FastForms.Questions.Question.type_label(@question.type) %></:item>
   <:item title="Deadline"><%= @question.deadline %></:item>
 </.list>
 

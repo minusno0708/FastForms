@@ -18,4 +18,12 @@ defmodule FastForms.Questions.Question do
     |> cast(attrs, [:title, :type, :deadline])
     |> validate_required([:title, :type])
   end
+
+  def type_label(type) do
+    case type do
+      1 -> "Radio"
+      2 -> "Select"
+      _ -> "Unknown"
+    end
+  end
 end
