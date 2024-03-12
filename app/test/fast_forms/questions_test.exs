@@ -8,7 +8,7 @@ defmodule FastForms.QuestionsTest do
 
     import FastForms.QuestionsFixtures
 
-    @invalid_attrs %{type: nil, title: nil, deadline: nil, uuid: nil}
+    @invalid_attrs %{type: nil, title: nil, deadline: nil}
 
     test "list_questions/0 returns all questions" do
       question = question_fixture()
@@ -21,13 +21,12 @@ defmodule FastForms.QuestionsTest do
     end
 
     test "create_question/1 with valid data creates a question" do
-      valid_attrs = %{type: 42, title: "some title", deadline: ~D[2024-03-10], uuid: "b50d565a-191d-4dc1-9c63-d0257f5984c2"}
+      valid_attrs = %{type: 42, title: "some title", deadline: ~D[2024-03-10]}
 
       assert {:ok, %Question{} = question} = Questions.create_question(valid_attrs)
       assert question.type == 42
       assert question.title == "some title"
       assert question.deadline == ~D[2024-03-10]
-      assert question.uuid == "b50d565a-191d-4dc1-9c63-d0257f5984c2"
     end
 
     test "create_question/1 with invalid data returns error changeset" do
@@ -36,13 +35,12 @@ defmodule FastForms.QuestionsTest do
 
     test "update_question/2 with valid data updates the question" do
       question = question_fixture()
-      update_attrs = %{type: 43, title: "some updated title", deadline: ~D[2024-03-11], uuid: "6092fa93-e575-42d7-978a-f82d2b9a7569"}
+      update_attrs = %{type: 43, title: "some updated title", deadline: ~D[2024-03-11]}
 
       assert {:ok, %Question{} = question} = Questions.update_question(question, update_attrs)
       assert question.type == 43
       assert question.title == "some updated title"
       assert question.deadline == ~D[2024-03-11]
-      assert question.uuid == "6092fa93-e575-42d7-978a-f82d2b9a7569"
     end
 
     test "update_question/2 with invalid data returns error changeset" do

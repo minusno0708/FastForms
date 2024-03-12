@@ -2,14 +2,13 @@
   Question <%= @question.id %>
   <:subtitle>This is a question record from your database.</:subtitle>
   <:actions>
-    <.link patch={~p"/questions/#{@question.uuid}/show/edit"} phx-click={JS.push_focus()}>
+    <.link patch={~p"/questions/#{@question}/show/edit"} phx-click={JS.push_focus()}>
       <.button>Edit question</.button>
     </.link>
   </:actions>
 </.header>
 
 <.list>
-  <:item title="Uuid"><%= @question.uuid %></:item>
   <:item title="Title"><%= @question.title %></:item>
   <:item title="Type"><%= @question.type %></:item>
   <:item title="Deadline"><%= @question.deadline %></:item>
@@ -17,13 +16,13 @@
 
 <.back navigate={~p"/questions"}>Back to questions</.back>
 
-<.modal :if={@live_action == :edit} id="question-modal" show on_cancel={JS.patch(~p"/questions/#{@question.uuid}")}>
+<.modal :if={@live_action == :edit} id="question-modal" show on_cancel={JS.patch(~p"/questions/#{@question}")}>
   <.live_component
     module={FastFormsWeb.QuestionLive.FormComponent}
     id={@question.id}
     title={@page_title}
     action={@live_action}
     question={@question}
-    patch={~p"/questions/#{@question.uuid}"}
+    patch={~p"/questions/#{@question}"}
   />
 </.modal>

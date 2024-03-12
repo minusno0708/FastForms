@@ -10,9 +10,8 @@
 <.table
   id="questions"
   rows={@streams.questions}
-  row_click={fn {_id, question} -> JS.navigate(~p"/questions/#{question.uuid}") end}
+  row_click={fn {_id, question} -> JS.navigate(~p"/questions/#{question}") end}
 >
-  <:col :let={{_id, question}} label="Uuid"><%= question.uuid %></:col>
   <:col :let={{_id, question}} label="Title"><%= question.title %></:col>
   <:col :let={{_id, question}} label="Type"><%= question.type %></:col>
   <:col :let={{_id, question}} label="Deadline"><%= question.deadline %></:col>

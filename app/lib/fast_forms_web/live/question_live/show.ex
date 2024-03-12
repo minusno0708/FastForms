@@ -9,11 +9,11 @@ defmodule FastFormsWeb.QuestionLive.Show do
   end
 
   @impl true
-  def handle_params(%{"id" => uuid}, _, socket) do
+  def handle_params(%{"id" => id}, _, socket) do
     {:noreply,
      socket
      |> assign(:page_title, page_title(socket.assigns.live_action))
-     |> assign(:question, Questions.get_question_by_uuid!(uuid))}
+     |> assign(:question, Questions.get_question!(id))}
   end
 
   defp page_title(:show), do: "Show Question"

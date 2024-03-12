@@ -81,19 +81,19 @@ defmodule FastFormsWeb.QuestionLiveTest do
     setup [:create_question]
 
     test "displays question", %{conn: conn, question: question} do
-      {:ok, _show_live, html} = live(conn, ~p"/questions/#{question.uuid}")
+      {:ok, _show_live, html} = live(conn, ~p"/questions/#{question}")
 
       assert html =~ "Show Question"
       assert html =~ question.title
     end
 
     test "updates question within modal", %{conn: conn, question: question} do
-      {:ok, show_live, _html} = live(conn, ~p"/questions/#{question.uuid}")
+      {:ok, show_live, _html} = live(conn, ~p"/questions/#{question}")
 
       assert show_live |> element("a", "Edit") |> render_click() =~
                "Edit Question"
 
-      assert_patch(show_live, ~p"/questions/#{question.uuid}/show/edit")
+      assert_patch(show_live, ~p"/questions/#{question}/show/edit")
 
       assert show_live
              |> form("#question-form", question: @invalid_attrs)
@@ -103,7 +103,7 @@ defmodule FastFormsWeb.QuestionLiveTest do
              |> form("#question-form", question: @update_attrs)
              |> render_submit()
 
-      assert_patch(show_live, ~p"/questions/#{question.uuid}")
+      assert_patch(show_live, ~p"/questions/#{question}")
 
       html = render(show_live)
       assert html =~ "Question updated successfully"

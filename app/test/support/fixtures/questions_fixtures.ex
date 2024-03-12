@@ -11,10 +11,9 @@ defmodule FastForms.QuestionsFixtures do
     {:ok, question} =
       attrs
       |> Enum.into(%{
-        deadline: ~N[2024-03-10 18:55:00],
+        deadline: ~D[2024-03-10],
         title: "some title",
-        type: 42,
-        uuid: "6092fa93-e575-42d7-978a-f82d2b9a7569"
+        type: 42
       })
       |> FastForms.Questions.create_question()
 
