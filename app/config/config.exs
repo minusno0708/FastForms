@@ -9,7 +9,7 @@ import Config
 
 config :fast_forms,
   ecto_repos: [FastForms.Repo],
-  generators: [timestamp_type: :utc_datetime]
+  generators: [timestamp_type: :utc_datetime, binary_id: true]
 
 # Configures the endpoint
 config :fast_forms, FastFormsWeb.Endpoint,
