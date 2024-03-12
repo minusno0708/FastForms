@@ -4,9 +4,9 @@ defmodule FastFormsWeb.QuestionLiveTest do
   import Phoenix.LiveViewTest
   import FastForms.QuestionsFixtures
 
-  @create_attrs %{type: 42, title: "some title", deadline: "2024-03-10T18:55:00", uuid: "some uuid"}
-  @update_attrs %{type: 43, title: "some updated title", deadline: "2024-03-11T18:55:00", uuid: "some updated uuid"}
-  @invalid_attrs %{type: nil, title: nil, deadline: nil, uuid: nil}
+  @create_attrs %{type: 42, title: "some title"}
+  @update_attrs %{type: 43, title: "some updated title"}
+  @invalid_attrs %{type: nil, title: nil}
 
   defp create_question(_) do
     question = question_fixture()

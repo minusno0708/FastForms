@@ -14,7 +14,7 @@ defmodule FastForms.QuestionsFixtures do
         deadline: ~N[2024-03-10 18:55:00],
         title: "some title",
         type: 42,
-        uuid: "some uuid"
+        uuid: "6092fa93-e575-42d7-978a-f82d2b9a7569"
       })
       |> FastForms.Questions.create_question()
 
