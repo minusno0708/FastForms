@@ -15,4 +15,4 @@ jobs:
           docker-compose up -d
           until curl -s localhost:4000; do sleep 5; done
       - name: Run Tests
-        run: docker-compose exec -T app mix test
+        run: mix test
