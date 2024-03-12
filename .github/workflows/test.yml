@@ -7,9 +7,6 @@ jobs:
     permissions:
       contents: read
       pull-requests: write
-    defaults:
-      run:
-        working-directory: ./app
     steps:
       - uses: actions/checkout@v4
 
@@ -18,4 +15,4 @@ jobs:
           docker-compose up -d
           until curl -s localhost:4000; do sleep 5; done
       - name: Run Tests
-        run: mix test
+        run: docker-compose exec -T app mix test
