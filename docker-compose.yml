@@ -16,6 +16,7 @@ services:
           condition: service_healthy
     command: >
       bash -c "
+        mix deps.get && mix deps.compile &&
         mix ecto.create && mix ecto.migrate && 
         mix phx.server"
     
@@ -37,4 +38,3 @@ services:
 
 volumes:
   app_modules:
-
