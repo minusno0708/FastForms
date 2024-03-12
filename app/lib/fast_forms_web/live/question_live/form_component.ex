@@ -5,6 +5,11 @@ defmodule FastFormsWeb.QuestionLive.FormComponent do
 
   @impl true
   def render(assigns) do
+    type_options = [
+      {"Radio", 1},
+      {"Select", 2}
+    ]
+
     ~H"""
     <div>
       <.header>
@@ -20,7 +25,8 @@ defmodule FastFormsWeb.QuestionLive.FormComponent do
         phx-submit="save"
       >
         <.input field={@form[:title]} type="text" label="Title" />
-        <.input field={@form[:type]} type="number" label="Type" />
+        <.input field={@form[:type]} type="select" options={type_options} />
+
         <:actions>
           <.button phx-disable-with="Saving...">Save Question</.button>
         </:actions>
