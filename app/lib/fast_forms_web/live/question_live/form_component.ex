@@ -95,6 +95,11 @@ defmodule FastFormsWeb.QuestionLive.FormComponent do
 
   defp set_uuid(question_params), do: %{question_params | "uuid" => UUID.uuid4()}
 
-  defp set_deadline(question_params), do: %{question_params | "deadline" =>
-    Date.utc_today() |> Date.add(7) |> Date.to_string()}
+  defp set_deadline(question_params) do
+    {{year, month, day}, _} = :calendar.local_time()
+    case Date.new(year, month, day) do
+      {:ok, date} -> %{question_params | "deadline" => date |> Date.add(7) |> Date.to_string()}
+      {:error, _} -> question_params
+    end
+  end
 end
