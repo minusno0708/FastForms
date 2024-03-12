@@ -37,6 +37,8 @@ defmodule FastForms.Questions do
   """
   def get_question!(id), do: Repo.get!(Question, id)
 
+  def get_question_by_uuid!(uuid), do: Repo.get_by!(Question, uuid: uuid)
+
   @doc """
   Creates a question.
 
