@@ -19,10 +19,8 @@ defmodule FastFormsWeb.QuestionLive.FormComponent do
         phx-change="validate"
         phx-submit="save"
       >
-        <.input field={@form[:uuid]} type="text" label="Uuid" />
         <.input field={@form[:title]} type="text" label="Title" />
         <.input field={@form[:type]} type="number" label="Type" />
-        <.input field={@form[:deadline]} type="date" label="Deadline" />
         <:actions>
           <.button phx-disable-with="Saving...">Save Question</.button>
         </:actions>
@@ -52,7 +50,7 @@ defmodule FastFormsWeb.QuestionLive.FormComponent do
   end
 
   def handle_event("save", %{"question" => question_params}, socket) do
-    save_question(socket, socket.assigns.action, question_params)
+    save_question(socket, socket.assigns.action, question_params |> set_uuid() |> set_deadline())
   end
 
   defp save_question(socket, :edit, question_params) do
@@ -93,12 +91,12 @@ defmodule FastFormsWeb.QuestionLive.FormComponent do
 
   defp notify_parent(msg), do: send(self(), {__MODULE__, msg})
 
-  defp set_uuid(question_params), do: %{question_params | "uuid" => UUID.uuid4()}
+  defp set_uuid(question_params), do: Map.put(question_params, "uuid", UUID.uuid4())
 
   defp set_deadline(question_params) do
     {{year, month, day}, _} = :calendar.local_time()
     case Date.new(year, month, day) do
-      {:ok, date} -> %{question_params | "deadline" => date |> Date.add(7) |> Date.to_string()}
+      {:ok, date} -> Map.put(question_params, "deadline", date |> Date.add(7) |> Date.to_string())
       {:error, _} -> question_params
     end
   end
