@@ -49,21 +49,16 @@
         - フォームの選択項目の削除
 
 ### データベース
-- Forms
-    - FormID String
-        - uuid
+- Questions
+    - UUID String
     - Title String
     - Type Number
         - 1 単一選択
         - 2 複数選択
     - Deadline Date
 - Choices
-    - ChoiceID String
-        - uuid
     - Content String
     - FormID ForeignKey[Forms]
 - Answers
-    - AnswerID String
-        - uuid
     - FormID ForeignKey[Forms]
     - ChoiceID Array[Foreignkey[Choices]]

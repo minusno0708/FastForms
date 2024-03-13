@@ -1,0 +1,34 @@
+<.header>
+  Question <%= @question.id %>
+  <:subtitle>This is a question record from your database.</:subtitle>
+  <:actions>
+    <.link patch={~p"/questions/#{@question}/show/edit"} phx-click={JS.push_focus()}>
+      <.button>Edit question</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Title"><%= @question.title %></:item>
+  <:item title="Type"><%= FastForms.Questions.Question.type_label(@question.type) %></:item>
+  <:item title="Deadline"><%= @question.deadline %></:item>
+</.list>
+
+<.back navigate={~p"/questions"}>Back to questions</.back>
+
+<.button
+  phx-click={JS.push("delete", value: %{id: @question.id}) |> hide("##{@question.id}")}
+  data-confirm="Are you sure?">
+Delete question
+</.button>
+
+<.modal :if={@live_action == :edit} id="question-modal" show on_cancel={JS.patch(~p"/questions/#{@question}")}>
+  <.live_component
+    module={FastFormsWeb.QuestionLive.FormComponent}
+    id={@question.id}
+    title={@page_title}
+    action={@live_action}
+    question={@question}
+    patch={~p"/questions/#{@question}"}
+  />
+</.modal>
