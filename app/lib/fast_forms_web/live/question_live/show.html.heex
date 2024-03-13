@@ -16,13 +16,11 @@
 
 <.back navigate={~p"/questions"}>Back to questions</.back>
 
-<.link
-  patch={~p"/questions"}
+<.button
   phx-click={JS.push("delete", value: %{id: @question.id}) |> hide("##{@question.id}")}
-  data-confirm="Are you sure?"
->
-  <.button>Delete question</.button>
-</.link>
+  data-confirm="Are you sure?">
+Delete question
+</.button>
 
 <.modal :if={@live_action == :edit} id="question-modal" show on_cancel={JS.patch(~p"/questions/#{@question}")}>
   <.live_component

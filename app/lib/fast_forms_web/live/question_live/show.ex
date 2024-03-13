@@ -19,10 +19,11 @@ defmodule FastFormsWeb.QuestionLive.Show do
   defp page_title(:show), do: "Show Question"
   defp page_title(:edit), do: "Edit Question"
 
+  @impl true
   def handle_event("delete", %{"id" => id}, socket) do
     question = Questions.get_question!(id)
     {:ok, _} = Questions.delete_question(question)
 
-    {:noreply, redirect(socket, to: Routes.question_index_path(socket, :index))}
+    {:noreply, redirect(socket, [to: "/questions"])}
   end
 end
