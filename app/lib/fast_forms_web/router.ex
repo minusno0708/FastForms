@@ -25,6 +25,13 @@ defmodule FastFormsWeb.Router do
 
     live "/questions/:id", QuestionLive.Show, :show
     live "/questions/:id/show/edit", QuestionLive.Show, :edit
+
+    live "/choices", ChoiceLive.Index, :index
+    live "/choices/new", ChoiceLive.Index, :new
+    live "/choices/:id/edit", ChoiceLive.Index, :edit
+
+    live "/choices/:id", ChoiceLive.Show, :show
+    live "/choices/:id/show/edit", ChoiceLive.Show, :edit
   end
 
   # Other scopes may use custom stacks.
