@@ -110,5 +110,14 @@ defmodule FastFormsWeb.QuestionLiveTest do
       assert html =~ "Question updated successfully"
       assert html =~ "some updated title"
     end
+
+    test "delete question within modal", %{conn: conn, question: question} do
+      {:ok, show_live, _html} = live(conn, ~p"/questions/#{question}")
+
+      show_live |> element("a", "Delete") |> render_click()
+
+      {:ok, index_live, _html} = live(conn, ~p"/questions")
+      refute has_element?(index_live, "#questions-#{question.id}")
+    end
   end
 end
