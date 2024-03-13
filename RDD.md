@@ -52,12 +52,13 @@
 - Questions
     - UUID String
     - Title String
-    - Type Number
+    - Type Integer
         - 1 単一選択
         - 2 複数選択
     - Deadline Date
 - Choices
     - Content String
+    - Count Integer
     - FormID ForeignKey[Forms]
 - Answers
     - FormID ForeignKey[Forms]

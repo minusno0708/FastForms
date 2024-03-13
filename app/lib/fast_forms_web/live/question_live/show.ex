@@ -5,7 +5,7 @@ defmodule FastFormsWeb.QuestionLive.Show do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, socket}
+    {:ok, stream(socket, :choices, Questions.list_choices())}
   end
 
   @impl true

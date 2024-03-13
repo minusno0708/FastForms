@@ -1,0 +1,42 @@
+<.header>
+  Listing Choices
+  <:actions>
+    <.link patch={~p"/choices/new"}>
+      <.button>New Choice</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table
+  id="choices"
+  rows={@streams.choices}
+  row_click={fn {_id, choice} -> JS.navigate(~p"/choices/#{choice}") end}
+>
+  <:col :let={{_id, choice}} label="Content"><%= choice.content %></:col>
+  <:col :let={{_id, choice}} label="Count"><%= choice.count %></:col>
+  <:action :let={{_id, choice}}>
+    <div class="sr-only">
+      <.link navigate={~p"/choices/#{choice}"}>Show</.link>
+    </div>
+    <.link patch={~p"/choices/#{choice}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={{id, choice}}>
+    <.link
+      phx-click={JS.push("delete", value: %{id: choice.id}) |> hide("##{id}")}
+      data-confirm="Are you sure?"
+    >
+      Delete
+    </.link>
+  </:action>
+</.table>
+
+<.modal :if={@live_action in [:new, :edit]} id="choice-modal" show on_cancel={JS.patch(~p"/choices")}>
+  <.live_component
+    module={FastFormsWeb.ChoiceLive.FormComponent}
+    id={@choice.id || :new}
+    title={@page_title}
+    action={@live_action}
+    choice={@choice}
+    patch={~p"/choices"}
+  />
+</.modal>

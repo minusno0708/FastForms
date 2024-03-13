@@ -19,4 +19,19 @@ defmodule FastForms.QuestionsFixtures do
 
     question
   end
+
+  @doc """
+  Generate a choice.
+  """
+  def choice_fixture(attrs \\ %{}) do
+    {:ok, choice} =
+      attrs
+      |> Enum.into(%{
+        content: "some content",
+        count: 42
+      })
+      |> FastForms.Questions.create_choice()
+
+    choice
+  end
 end

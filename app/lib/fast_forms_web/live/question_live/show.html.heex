@@ -6,6 +6,11 @@
       <.button>Edit question</.button>
     </.link>
   </:actions>
+  <:actions>
+    <.link patch={~p"/choices/new"}>
+      <.button>New Choice</.button>
+    </.link>
+  </:actions>
 </.header>
 
 <.list>
@@ -13,6 +18,29 @@
   <:item title="Type"><%= FastForms.Questions.Question.type_label(@question.type) %></:item>
   <:item title="Deadline"><%= @question.deadline %></:item>
 </.list>
+
+<.table
+  id="choices"
+  rows={@streams.choices}
+  row_click={fn {_id, choice} -> JS.navigate(~p"/choices/#{choice}") end}
+>
+  <:col :let={{_id, choice}} label="Content"><%= choice.content %></:col>
+  <:col :let={{_id, choice}} label="Count"><%= choice.count %></:col>
+  <:action :let={{_id, choice}}>
+    <div class="sr-only">
+      <.link navigate={~p"/choices/#{choice}"}>Show</.link>
+    </div>
+    <.link patch={~p"/choices/#{choice}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={{id, choice}}>
+    <.link
+      phx-click={JS.push("delete", value: %{id: choice.id}) |> hide("##{id}")}
+      data-confirm="Are you sure?"
+    >
+      Delete
+    </.link>
+  </:action>
+</.table>
 
 <.back navigate={~p"/questions"}>Back to questions</.back>
 

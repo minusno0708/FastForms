@@ -60,4 +60,60 @@ defmodule FastForms.QuestionsTest do
       assert %Ecto.Changeset{} = Questions.change_question(question)
     end
   end
+
+  describe "choices" do
+    alias FastForms.Questions.Choice
+
+    import FastForms.QuestionsFixtures
+
+    @invalid_attrs %{count: nil, content: nil}
+
+    test "list_choices/0 returns all choices" do
+      choice = choice_fixture()
+      assert Questions.list_choices() == [choice]
+    end
+
+    test "get_choice!/1 returns the choice with given id" do
+      choice = choice_fixture()
+      assert Questions.get_choice!(choice.id) == choice
+    end
+
+    test "create_choice/1 with valid data creates a choice" do
+      valid_attrs = %{count: 42, content: "some content"}
+
+      assert {:ok, %Choice{} = choice} = Questions.create_choice(valid_attrs)
+      assert choice.count == 42
+      assert choice.content == "some content"
+    end
+
+    test "create_choice/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Questions.create_choice(@invalid_attrs)
+    end
+
+    test "update_choice/2 with valid data updates the choice" do
+      choice = choice_fixture()
+      update_attrs = %{count: 43, content: "some updated content"}
+
+      assert {:ok, %Choice{} = choice} = Questions.update_choice(choice, update_attrs)
+      assert choice.count == 43
+      assert choice.content == "some updated content"
+    end
+
+    test "update_choice/2 with invalid data returns error changeset" do
+      choice = choice_fixture()
+      assert {:error, %Ecto.Changeset{}} = Questions.update_choice(choice, @invalid_attrs)
+      assert choice == Questions.get_choice!(choice.id)
+    end
+
+    test "delete_choice/1 deletes the choice" do
+      choice = choice_fixture()
+      assert {:ok, %Choice{}} = Questions.delete_choice(choice)
+      assert_raise Ecto.NoResultsError, fn -> Questions.get_choice!(choice.id) end
+    end
+
+    test "change_choice/1 returns a choice changeset" do
+      choice = choice_fixture()
+      assert %Ecto.Changeset{} = Questions.change_choice(choice)
+    end
+  end
 end
