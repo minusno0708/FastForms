@@ -21,10 +21,10 @@ defmodule FastForms.QuestionsTest do
     end
 
     test "create_question/1 with valid data creates a question" do
-      valid_attrs = %{type: 42, title: "some title", deadline: ~D[2024-03-10]}
+      valid_attrs = %{type: 1, title: "some title", deadline: ~D[2024-03-10]}
 
       assert {:ok, %Question{} = question} = Questions.create_question(valid_attrs)
-      assert question.type == 42
+      assert question.type == 1
       assert question.title == "some title"
       assert question.deadline == ~D[2024-03-10]
     end
@@ -35,10 +35,10 @@ defmodule FastForms.QuestionsTest do
 
     test "update_question/2 with valid data updates the question" do
       question = question_fixture()
-      update_attrs = %{type: 43, title: "some updated title", deadline: ~D[2024-03-11]}
+      update_attrs = %{type: 2, title: "some updated title", deadline: ~D[2024-03-11]}
 
       assert {:ok, %Question{} = question} = Questions.update_question(question, update_attrs)
-      assert question.type == 43
+      assert question.type == 2
       assert question.title == "some updated title"
       assert question.deadline == ~D[2024-03-11]
     end

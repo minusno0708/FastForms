@@ -4,9 +4,9 @@ defmodule FastFormsWeb.QuestionLiveTest do
   import Phoenix.LiveViewTest
   import FastForms.QuestionsFixtures
 
-  @create_attrs %{type: 42, title: "some title"}
-  @update_attrs %{type: 43, title: "some updated title"}
-  @invalid_attrs %{type: nil, title: nil}
+  @create_attrs %{type: 1, title: "some title"}
+  @update_attrs %{type: 2, title: "some updated title"}
+  @invalid_attrs %{title: nil}
 
   defp create_question(_) do
     question = question_fixture()
@@ -44,6 +44,7 @@ defmodule FastFormsWeb.QuestionLiveTest do
       html = render(index_live)
       assert html =~ "Question created successfully"
       assert html =~ "some title"
+      assert html =~ "Radio"
     end
 
     test "updates question in listing", %{conn: conn, question: question} do
