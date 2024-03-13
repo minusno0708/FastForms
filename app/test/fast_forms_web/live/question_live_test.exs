@@ -114,7 +114,7 @@ defmodule FastFormsWeb.QuestionLiveTest do
     test "delete question within modal", %{conn: conn, question: question} do
       {:ok, show_live, _html} = live(conn, ~p"/questions/#{question}")
 
-      show_live |> element("a", "Delete") |> render_click()
+      show_live |> element("button", "Delete") |> render_click()
 
       {:ok, index_live, _html} = live(conn, ~p"/questions")
       refute has_element?(index_live, "#questions-#{question.id}")
